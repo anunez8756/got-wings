@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+
+<body>
+
+    <div id='map' style='width: 400px; height: 300px;'></div>
+
+   
+
+    <form id="zipcode-form">
+
+        <label for="zipcode-input">Choose Your Zipcode</label>
+
+        <input type = "text" id = "zipcode-input">
+
+        <!-- Test Button -->
+        <input id = "user-zipcode" type = "submit" value = "Submit">
+
+    </form>
+
+    <!-- WOrking Button -->
+
+    <div id="bus-data"></div>
+<!-- 
+    <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Restaurant Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Actors</th>
+              </tr>
+            </thead>
+            <tbody> -->
+              <!-- Insert movie rows here -->
+             </tbody>
+          </table> 
+
+    <script>
+    //        var createRow = function(data) {
+    //   // Get reference to existing tbody element, create a new table row element
+    //   var tBody = $("tbody");
+    //   var tRow = $("<tr>");
+
+    //   // Methods run on jQuery selectors return the selector they we run on
+    //   // This is why we can create and save a reference to a td in the same statement we update its text
+    //   var restNameTd = $("<td>").text(data.businesses[0].name);
+    //   var restAddressTd = $("<td>").text(data.businesses[0].location.display_address[0]);
+    //   var actorsTd = $("<td>").text(data.Actors);
+    //   // Append the newly created table data to the table row
+    //   tRow.append(restNameTd, restAddressTdTd);
+    //   // Append the table row to the table body
+    //   tBody.append(tRow);
+    // };
+        var locations = "";
+        
+        //var long = data.businesses.coordinates.longitude;
+        //var lat = data.businesses.coordinates.latitude;
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoiamFpY2xhcmsxOTk1IiwiYSI6ImNqajFucWl3cTB1Z20zcXQ0NmF0ZjlkencifQ.M2jx9yaj8_XQONjv9iJLjg';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v9',
+            center: [-74.065707, 40.730771], // defaulted to rahway nj
+             zoom: 13
+        });
+
+        $("#user-zipcode").on('click', function (event) {
+            // Preventing the button from trying to submit the form
+            event.preventDefault();
+            // Storing the zipcode entered
+            var inputZip = $("#zipcode-input").val().trim();
+
+            locations = inputZip;
+            console.log(locations);
+
+
+            // Create variable query for latitude and longitude
+            var YELP_API = "xvXQKslc5FPXMQbD9aUwiI6W94gAZBYARoPj7sjmYXwkWgwXdSiOFVA_YNdtK8zXoxMNA-DrY1twG3F15bShs8Fppu064vISP15QkCiB5wVwz5AadFZEzepPrCFAW3Yx";
+            
+           
+            //User enters in the zipcode that they want to use for the search
+
+            // concatenate the long (-74.065707) and lat (40.730771) into the yelp api url. With a limit of 10 search results for Pizzeria
+            const yelpURL = "https://api.yelp.com/v3/businesses/search?term=wings&location=" + locations + "&limit=10";
+             //https://api.yelp.com/v3/businesses/search?location=07065&limit=10
+
+            // proxy URL to fix CORS issue
+            const proxyURL = 'https://shielded-hamlet-43668.herokuapp.com/';
+            
+
+            $.ajax({
+                // concatenate the proxyURL with the yelpURL for the CORS issue
+                url: proxyURL + yelpURL,
+                method: 'GET',
+
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + YELP_API);
+                },
+                complete: function (response) {
+                    // console.log(response);
+                    // console.log(response.region);
+
+                }
+
+            }).done(function (data) {
+                
+
+                console.log(data);
+                console.log(data.businesses[0].name, data.businesses[0].location.display_address[0], data.businesses[0].location.display_address[1]);
+                console.log(data.businesses[1].name, data.businesses[1].location.display_address[0], data.businesses[1].location.display_address[1]);
+
+
+                    
+                for (i = 0; i < data.businesses.length; i++){
+                    $("#bus-data").append(data.businesses[i].name + "<br>");
+                    // $("#bus-data").append(data.businesses[i].location.display_address[i] + "<br>");
+
+                }
+                  
+                  
+
+            //    console.log(text);
+
+            console.log(data.businesses[0].image_url);
+            console.log(data.businesses[0].location.display_address);
+            //     }
+
+            var rName = data.businesses[0].name;
+            var rLocation = data.businesses[0].location.display_address;
+           
+            var newDiv = $('<div>');
+
+            var childDiv = $('<div>');
+            childDiv.append(rName);
+            childDiv.append(rLocation);
+
+            newDiv.append(childDiv);
+
+            $('#text_printer').append(newDiv)
+
+            });
+        });
+
+
+        
+
+
+
+
+// var restInfo1 = $("<p>").text(data.businesses[0].name, data.businesses[0].image_url);
+
+            // var restInfo2 = $("<p>").html(data.businesses[1].name);
+
+            // var restInfo3 = $("<p>").html(data.businesses[2].name);
+
+            // var restInfo4 = $("<p>").html(data.businesses[3].name);
+
+            // var restInfo5 = $("<p>").html(data.businesses[4].name);
+
+            // var restInfo6 = $("<p>").html(data.businesses[5].name);
+
+            // var restInfo7 = $("<p>").html(data.businesses[6].name);
+
+            // var restInfo8 = $("<p>").html(data.businesses[7].name); 
+
+            //     $("#text_printer").html(restInfo1);
+
+            //     $("#text_printer").append(restInfo2);
+
+            //     $("#text_printer").append(restInfo3);
+
+            //     $("#text_printer").append(restInfo4);
+
+            //     $("#text_printer").append(restInfo5);
+
+            //     $("#text_printer").append(restInfo6);
+
+            //     $("#text_printer").append(restInfo7);
+
+            //     $("#text_printer").append(restInfo8);
+
+
+             
+            //  $("#user-zipcode").on("click", function(event) {
+            // // Preventing the button from trying to submit the form
+            // event.preventDefault();
+            // // Storing the zipcode entered
+            // var inputZip = $("#zipcode-input").val().trim();
+
+            // locations.push(inputZip);
+            // console.log(locations);
+
+            // // Running the searchWingsFunction function (passing in the zipcode as an argument)
+            // // console.log(inputZip);
+            // // console.log(zipcode);
+            
+            
+    </script>
+
+</html>
+
