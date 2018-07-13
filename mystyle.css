@@ -1,23 +1,44 @@
 .full-wrapper{
-    background-color: #f57c00;
-}
-.page-footer-copyright{
   background-color: #f57c00;
 }
+.page-footer-copyright{
+background-color: #f57c00;
+}
 .btn{
-  background-color:#212121;
+background-color:#212121;
 }
 img {
-  border-radius: 50%;
+border-radius: 50%;
 }
 h5 {
-  text-align: center;
+text-align: center;
 }
 h6 {
-  text-align: center;
+text-align: center;
 }
 
+.icon-img{
+width: 50px;
+height: 50px;
+}
+.main-content{
+/* min-height: 600px; */
+margin-top: auto;
+margin-bottom: auto;
+height: 100%;
+}
+body {
+display: flex;
+min-height: 100vh;
+flex-direction: column;
+}
 
+main {
+flex: 1 0 auto;
+}
+.image {
+height: 400px;
+}
 
 
 
