@@ -82,16 +82,16 @@
         <div class="col 12 m7">
         </div>
         <div class="col s1">
-          <img "materialboxed" width="50" src="fb.png">
+          <img "materialboxed" class="icon" id="fb" width="50" src="fb.png">
+        </div>b
+        <div class="col s1">
+          <img "materialboxed" class="icon" id="ig"  width="50" src="ig.png">
         </div>
         <div class="col s1">
-          <img "materialboxed" width="50" src="ig.png">
+          <img "materialboxed" class="icon" id="tw"  width="50" src="tw.png">
         </div>
         <div class="col s1">
-          <img "materialboxed" width="50" src="tw.png">
-        </div>
-        <div class="col s1">
-          <img "materialboxed" width="50" src="pt.png">
+          <img "materialboxed" class="icon" id="pt"  width="50" src="pt.png">
         </div>
       </div>
     </div>
@@ -109,6 +109,23 @@
 
     instance.next();
     instance.next(4);
+
+        // on click for social media icons
+$("#fb").on("click", function() {
+      window.open('https://www.facebook.com', '_blank');
+});
+
+$("#ig").on("click", function() {
+  window.open('https://www.instagram.com', '_blank');
+});
+
+$("#tw").on("click", function() {
+  window.open('https://www.twitter.com', '_blank');
+});
+
+$("#pt").on("click", function() {
+  window.open('https://www.pinterest.com', '_blank');
+});
 
   </script>
 
