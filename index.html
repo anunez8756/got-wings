@@ -69,22 +69,22 @@
       <h5 class="black-text">Contact Us</h5>
       <h6 class="black-text">Connect</h6>
       <div class="row">
-          <div class="col s4">
-          </div>
-          <div class="col s1">
-            <img class="materialboxed icon-img" width="50" src="fb.png">
-          </div>
-          <div class="col s1">
-            <img class="materialboxed icon-img" width="50" src="ig.png">
-          </div>
-          <div class="col s1">
-            <img class="materialboxed icon-img" width="50" src="tw.png">
-          </div>
-          <div class="col s1">
-            <img class="materialboxed icon-img" width="50" src="pt.png">
-          </div>
-          <div class="col s4">
-            </div>
+        <div class="col s4">
+        </div>
+        <div class="col s1">
+          <img class="materialboxed icon-img" id="fb" width="50" src="fb.png">
+        </div>
+        <div class="col s1">
+          <img class="materialboxed icon-img" id="ig" width="50" src="ig.png">
+        </div>
+        <div class="col s1">
+          <img class="materialboxed icon-img" id="tw" width="50" src="tw.png">
+        </div>
+        <div class="col s1">
+          <img class="materialboxed icon-img" id="pt" width="50" src="pt.png">
+        </div>
+        <div class="col s4">
+        </div>
         <!-- </div> -->
       </div>
       <div class="row">
@@ -99,13 +99,34 @@
 
     $(document).ready(function () {
       $('.carousel').carousel();
+
+      //    $('.carousel').carousel('methodName');
+      // $('.carousel').carousel('methodName', paramName);
+
+      // instance.next();
+      // instance.next(4);
+
+      $("#fb").on("click", function () {
+        window.open('https://www.facebook.com', '_blank');
+      });
+
+      $("#ig").on("click", function () {
+        window.open('https://www.instagram.com', '_blank');
+      });
+
+      $("#tw").on("click", function () {
+        window.open('https://www.twitter.com', '_blank');
+      });
+
+      $("#pt").on("click", function () {
+        window.open('https://www.pinterest.com', '_blank');
+      });
+
+
+
+
     });
 
-    $('.carousel').carousel('methodName');
-    $('.carousel').carousel('methodName', paramName);
-
-    instance.next();
-    instance.next(4);
 
   </script>
 
