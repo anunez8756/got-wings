@@ -1,0 +1,25 @@
+#div1{
+    width: 400px;
+    height: 600px;
+    margin-left: 15px;
+    float: left;
+}
+
+#map{
+    width: 400px; 
+    height: 300px; 
+    border-radius: 25px;
+    margin-top: 10px;  
+}
+
+#bus-data{
+    float: rigt;
+    width: 100%;
+    margin-top: 0%;
+}
+
+.clearfix::after {
+    content:"";
+    display: block;
+    clear: both;
+}

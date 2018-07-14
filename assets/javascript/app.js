@@ -56,10 +56,38 @@
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v8',
-            center: [-74.065707, 40.730771], // defaulted to rahway nj
-             zoom: 13
+            center: [-74.065881, 40.730752],
+             zoom: 15
 
         
+        });
+        map.on('load', function() {
+            map.loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Cat_silhouette.svg/400px-Cat_silhouette.svg.png', function(error, image) {
+                if (error) throw error;
+                map.addImage('cat', image);
+                map.addLayer({
+                    "id": "points",
+                    "type": "symbol",
+                    "source": {
+                        "type": "geojson",
+                        "data": {
+                            "type": "FeatureCollection",
+                            "features": [{
+                                "type": "Feature",
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [-74.065881, 40.730752],
+                                    "zoom": "3"
+                                }
+                            }]
+                        }
+                    },
+                    "layout": {
+                        "icon-image": "cat",
+                        "icon-size": 0.10
+                    }
+                });
+            });
         });
 
         
@@ -129,7 +157,6 @@
                 for (i = 0; i < data.businesses.length; i++){
                     $("#bus-data").append(data.businesses[i].name + "<br>");
                     // $("#bus-data").append(data.businesses[i].location.display_address[i] + "<br>");
-
                 }
                   
                   
