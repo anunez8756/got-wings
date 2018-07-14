@@ -56,7 +56,7 @@
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v8',
-            center: [-74.065881, 40.730752], // defaulted to rahway nj
+            center: [-74.065881, 40.730752],
              zoom: 15
 
         
@@ -157,7 +157,6 @@
                 for (i = 0; i < data.businesses.length; i++){
                     $("#bus-data").append(data.businesses[i].name + "<br>");
                     // $("#bus-data").append(data.businesses[i].location.display_address[i] + "<br>");
-
                 }
                   
                   
