@@ -40,6 +40,10 @@ flex: 1 0 auto;
 height: 400px;
 }
 
+.icon {
+  cursor: pointer;
+}
+
 
 
 
