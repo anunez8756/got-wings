@@ -5,66 +5,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <link rel="stylesheet" href="mystyle.css" />
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
+    <!-- Header -->
+    <nav class="full-wrapper">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">
+                    <img class="materialboxed" width="65" src="winglogo.png">
+                </a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>
+                        <a class="waves-effect waves-light btn" href="main_index.html">HOME</a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-light btn" href="about.html">ABOUT US</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--MAP-->
+    <div id='map' style='width: 400px; height: 300px;'>
+        <div class="row">
+            <div class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
 
-    <div id='map' style='width: 400px; height: 300px;'></div>
-
-   
-
-    <form id="zipcode-form">
-
-        <label for="zipcode-input">Choose Your Zipcode</label>
-
-        <input type = "text" id = "zipcode-input">
-
-        <!-- Test Button -->
-        <input id = "user-zipcode" type = "submit" value = "Submit">
-
+                        <form id="zipcode-form">
+                            <label for="zipcode-input">Enter Zip Code</label>
+                            <input type="text" id="zipcode-input">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </form>
-
-    <!-- WOrking Button -->
-
+    <!-- Working Button -->
     <div id="bus-data"></div>
-<!-- 
-    <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Restaurant Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Actors</th>
-              </tr>
-            </thead>
-            <tbody> -->
-              <!-- Insert movie rows here -->
-             </tbody>
-          </table> 
+    <!-- Insert movie rows here -->
+    </tbody>
+    </table>
+    <!--Footer-->
+    <footer class="page-footer-copyright">
+        <div class="container">
 
+            <h6 class="black-text">Connect</h6>
+            <div class="row">
+                <div class="col s4">
+                </div>
+                <div class="col s1">
+                    <img class="icon-img" id="fb" width="50" src="fb.png">
+                </div>
+                <div class="col s1">
+                    <img class="icon-img" id="ig" width="50" src="ig.png">
+                </div>
+                <div class="col s1">
+                    <img class="icon-img" id="tw" width="50" src="tw.png">
+                </div>
+                <div class="col s1">
+                    <img class="icon-img" id="pt" width="50" src="pt.png">
+                </div>
+                <div class="col s4">
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="center-align col s12">© 2018 Copyright</div>
+            </div>
+        </div>
+    </footer>
     <script>
-    //        var createRow = function(data) {
-    //   // Get reference to existing tbody element, create a new table row element
-    //   var tBody = $("tbody");
-    //   var tRow = $("<tr>");
-
-    //   // Methods run on jQuery selectors return the selector they we run on
-    //   // This is why we can create and save a reference to a td in the same statement we update its text
-    //   var restNameTd = $("<td>").text(data.businesses[0].name);
-    //   var restAddressTd = $("<td>").text(data.businesses[0].location.display_address[0]);
-    //   var actorsTd = $("<td>").text(data.Actors);
-    //   // Append the newly created table data to the table row
-    //   tRow.append(restNameTd, restAddressTdTd);
-    //   // Append the table row to the table body
-    //   tBody.append(tRow);
-    // };
-        var locations = "";
         
+        var locations = "";
+
         //var long = data.businesses.coordinates.longitude;
         //var lat = data.businesses.coordinates.latitude;
 
@@ -73,7 +102,7 @@
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v9',
             center: [-74.065707, 40.730771], // defaulted to rahway nj
-             zoom: 13
+            zoom: 13
         });
 
         $("#user-zipcode").on('click', function (event) {
@@ -85,20 +114,17 @@
             locations = inputZip;
             console.log(locations);
 
-
             // Create variable query for latitude and longitude
             var YELP_API = "xvXQKslc5FPXMQbD9aUwiI6W94gAZBYARoPj7sjmYXwkWgwXdSiOFVA_YNdtK8zXoxMNA-DrY1twG3F15bShs8Fppu064vISP15QkCiB5wVwz5AadFZEzepPrCFAW3Yx";
-            
-           
+
             //User enters in the zipcode that they want to use for the search
 
             // concatenate the long (-74.065707) and lat (40.730771) into the yelp api url. With a limit of 10 search results for Pizzeria
             const yelpURL = "https://api.yelp.com/v3/businesses/search?term=wings&location=" + locations + "&limit=10";
-             //https://api.yelp.com/v3/businesses/search?location=07065&limit=10
+            //https://api.yelp.com/v3/businesses/search?location=07065&limit=10
 
             // proxy URL to fix CORS issue
             const proxyURL = 'https://shielded-hamlet-43668.herokuapp.com/';
-            
 
             $.ajax({
                 // concatenate the proxyURL with the yelpURL for the CORS issue
@@ -115,46 +141,39 @@
                 }
 
             }).done(function (data) {
-                
 
                 console.log(data);
                 console.log(data.businesses[0].name, data.businesses[0].location.display_address[0], data.businesses[0].location.display_address[1]);
                 console.log(data.businesses[1].name, data.businesses[1].location.display_address[0], data.businesses[1].location.display_address[1]);
 
-
-                    
-                for (i = 0; i < data.businesses.length; i++){
+                for (i = 0; i < data.businesses.length; i++) {
                     $("#bus-data").append(data.businesses[i].name + "<br>");
                     // $("#bus-data").append(data.businesses[i].location.display_address[i] + "<br>");
-
                 }
-                  
-                  
+                //    console.log(text);
 
-            //    console.log(text);
+                console.log(data.businesses[0].image_url);
+                console.log(data.businesses[0].location.display_address);
+                //     }
 
-            console.log(data.businesses[0].image_url);
-            console.log(data.businesses[0].location.display_address);
-            //     }
+                var rName = data.businesses[0].name;
+                var rLocation = data.businesses[0].location.display_address;
 
-            var rName = data.businesses[0].name;
-            var rLocation = data.businesses[0].location.display_address;
-           
-            var newDiv = $('<div>');
+                var newDiv = $('<div>');
 
-            var childDiv = $('<div>');
-            childDiv.append(rName);
-            childDiv.append(rLocation);
+                var childDiv = $('<div>');
+                childDiv.append(rName);
+                childDiv.append(rLocation);
 
-            newDiv.append(childDiv);
+                newDiv.append(childDiv);
 
-            $('#text_printer').append(newDiv)
+                $('#text_printer').append(newDiv)
 
             });
         });
 
 
-        
+
 
 
 
@@ -192,7 +211,7 @@
             //     $("#text_printer").append(restInfo8);
 
 
-             
+
             //  $("#user-zipcode").on("click", function(event) {
             // // Preventing the button from trying to submit the form
             // event.preventDefault();
@@ -205,9 +224,8 @@
             // // Running the searchWingsFunction function (passing in the zipcode as an argument)
             // // console.log(inputZip);
             // // console.log(zipcode);
-            
-            
+
+
     </script>
 
 </html>
-
